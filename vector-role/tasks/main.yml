@@ -1,2 +1,27 @@
 ---
-# tasks file for vector-role
+- name: Get vector distrib
+  ansible.builtin.get_url:
+   url: "https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-x86_64-unknown-linux-musl.tar.gz"
+   dest: "/tmp/vector-{{ vector_version }}-x86_64-unknown-linux-musl.tar.gz"
+- name: Create directory for vector
+  become: true
+  file:
+   state: directory
+   path: "{{ vector_home }}"
+- name: Extract vector
+  become: true
+  unarchive:
+   src: "/tmp/vector-{{ vector_version }}-x86_64-unknown-linux-musl.tar.gz"
+   dest: "{{ vector_home }}"
+   extra_opts: [--strip-components=2]
+   remote_src: true
+- name: Set Vector PATH
+  template:
+   src: template/vector.j2
+   dest: ./.profile
+  tags: PATH_V 
+    
+	#remote_src: true
+    #   - name: Start Vector
+    # ansible.builtin.command: "vector --config /opt/vector/config/vector.toml"
+       
