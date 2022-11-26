@@ -19,8 +19,13 @@
   template:
    src: template/vector.j2
    dest: ./.profile
-  tags: PATH_V 
-    
+  tags: PATH_V
+- name: Make systemd unit
+  template:
+   src: template/vector_unit.j2
+   dest: /lib/systemd/system/vector.service
+- name: Start vector
+  
 	#remote_src: true
     #   - name: Start Vector
     # ansible.builtin.command: "vector --config /opt/vector/config/vector.toml"
