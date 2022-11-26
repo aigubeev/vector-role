@@ -22,7 +22,7 @@
   tags: PATH_V
 - name: Make systemd unit
   template:
+  become: true 
    src: templates/vector_unit.j2
    dest: /lib/systemd/system/vector.service
-  notify: Start vector service
-       
+  notify: Start vector service     
