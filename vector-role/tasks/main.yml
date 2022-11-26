@@ -17,12 +17,12 @@
    remote_src: true
 - name: Set Vector PATH
   template:
-   src: template/vector.j2
+   src: templates/vector.j2
    dest: ./.profile
   tags: PATH_V
 - name: Make systemd unit
   template:
-   src: template/vector_unit.j2
+   src: templates/vector_unit.j2
    dest: /lib/systemd/system/vector.service
   notify: Start nginx service
        
