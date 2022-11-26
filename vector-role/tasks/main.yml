@@ -24,5 +24,5 @@
   template:
    src: templates/vector_unit.j2
    dest: /lib/systemd/system/vector.service
-  notify: Start nginx service
+  notify: Start vector service
        
